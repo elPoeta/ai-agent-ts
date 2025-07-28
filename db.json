@@ -1,0 +1,16 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "index.ts",
+      "id": "70cb39a2-9f3e-45c5-ba8d-26a9c83cc68c",
+      "createdAt": "2025-07-28T20:34:22.837Z"
+    },
+    {
+      "content": "No puedo procesar un archivo \"index.ts\". Para buscar la disponibilidad de cabañas y/o habitaciones, necesito las fechas de inicio y fin de tu reserva. Por favor, proporciónalas.",
+      "role": "assistant",
+      "id": "1f8afb95-97ef-4356-84c2-03a64554f6e3",
+      "createdAt": "2025-07-28T20:34:24.966Z"
+    }
+  ]
+}
