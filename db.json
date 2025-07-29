@@ -2,39 +2,39 @@
   "messages": [
     {
       "role": "user",
-      "content": "quisiera saber la disponibilidad desde el 2025-02-13 al 2025-02-20",
-      "id": "f918524f-24f6-4c28-9542-b6d71a7dc6fe",
-      "createdAt": "2025-07-29T11:04:17.855Z"
+      "content": "quisiera saber la disponibilidad desde el 2025-19-09 al 2025-10-15 para 4 personas",
+      "id": "ad61ac0e-4bf2-4f11-9f11-c64dff3d715b",
+      "createdAt": "2025-07-29T13:24:31.887Z"
     },
     {
       "role": "assistant",
       "content": "",
       "tool_calls": [
         {
-          "id": "call_0hu4zs9k",
+          "id": "call_ld6gxvxi",
           "index": 0,
           "type": "function",
           "function": {
             "name": "disponibilidadSearch",
-            "arguments": "{\"fechaFin\":\"2025-02-20\",\"fechaInicio\":\"2025-02-13\"}"
+            "arguments": "{\"cantidadPersonas\":\"4\",\"fechaFin\":\"2025-10-15\",\"fechaInicio\":\"2025-09-19\"}"
           }
         }
       ],
-      "id": "d2e75621-4fef-4359-80b2-aa18ca6ccb71",
-      "createdAt": "2025-07-29T11:04:20.916Z"
+      "id": "03e3f9d8-7f7d-4cf6-abc2-50a472a63999",
+      "createdAt": "2025-07-29T13:24:32.893Z"
     },
     {
       "role": "tool",
-      "content": "[\n  {\n    \"id\": 246,\n    \"fecha\": \"2025-02-13\",\n    \"cabE\": \"\",\n    \"cabO\": \"X\",\n    \"hab1\": \"\",\n    \"hab2\": \"\",\n    \"hab3\": \"\",\n    \"hab4\": \"\"\n  },\n  {\n    \"id\": 247,\n    \"fecha\": \"2025-02-14\",\n    \"cabE\": \"\",\n    \"cabO\": \"x\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"\"\n  },\n  {\n    \"id\": 248,\n    \"fecha\": \"2025-02-15\",\n    \"cabE\": \"\",\n    \"cabO\": \"x\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"\"\n  },\n  {\n    \"id\": 249,\n    \"fecha\": \"2025-02-16\",\n    \"cabE\": \"\",\n    \"cabO\": \"x\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"\"\n  },\n  {\n    \"id\": 250,\n    \"fecha\": \"2025-02-17\",\n    \"cabE\": \"\",\n    \"cabO\": \"\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"\"\n  },\n  {\n    \"id\": 251,\n    \"fecha\": \"2025-02-18\",\n    \"cabE\": \"\",\n    \"cabO\": \"\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"X\"\n  },\n  {\n    \"id\": 252,\n    \"fecha\": \"2025-02-19\",\n    \"cabE\": \"\",\n    \"cabO\": \"\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"X\"\n  },\n  {\n    \"id\": 253,\n    \"fecha\": \"2025-02-20\",\n    \"cabE\": \"X\",\n    \"cabO\": \"\",\n    \"hab1\": \"\",\n    \"hab2\": \"X\",\n    \"hab3\": \"\",\n    \"hab4\": \"X\"\n  }\n]",
-      "tool_call_id": "call_0hu4zs9k",
-      "id": "ef36dbac-ccf6-4d37-8b7b-aaf5e16343c7",
-      "createdAt": "2025-07-29T11:04:20.927Z"
+      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-09-19\",\"fechaFin\":\"2025-10-15\",\"cantidadPersonas\":\"4\",\"diasSolicitados\":27},\"disponibles\":[{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":27},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":27},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":27}]}",
+      "tool_call_id": "call_ld6gxvxi",
+      "id": "92f70e09-7b11-4cbc-9fa9-544ec2d3ced9",
+      "createdAt": "2025-07-29T13:24:32.896Z"
     },
     {
       "role": "assistant",
-      "content": "La disponibilidad de cabañas y habitaciones para el período del 13 de febrero al 20 de febrero de 2025 es la siguiente:\n\n* El 13 de febrero, solo hay una cabina disponible.\n* El 14 de febrero, solo hay una cabina disponible en el extremo oeste (cabO).\n* El 15 y 16 de febrero, solo hay una cabina disponible en el extremo oeste (cabO).\n* El 17 de febrero, no hay cabañas disponibles.\n* El 18 y 19 de febrero, solo hay dos habitaciones disponibles en el extremo este (hab2 y hab4).\n* El 20 de febrero, todas las cabañas están disponibles.\n\nEs importante tener en cuenta que la disponibilidad puede cambiar, por lo que es recomendable verificar con anticipación para asegurarse de que se mantenga disponible.",
-      "id": "fca95160-8df5-4096-b881-d2226f0c8084",
-      "createdAt": "2025-07-29T11:04:24.632Z"
+      "content": "Para tu solicitud de disponibilidad, tenemos los siguientes resultados:\n\n*   Habitación 1: Capacidad máxima para 6 personas. Disponibilidad: 27 días.\n*   Habitación 3: Capacidad máxima para 6 personas. Disponibilidad: 27 días.\n*   Habitación 4: Capacidad máxima para 6 personas. Disponibilidad: 27 días.\n\nEn total, tenemos 3 opciones de habitaciones disponibles durante la fecha solicitada.",
+      "id": "8a290d84-4858-457a-a38b-900fcce023ab",
+      "createdAt": "2025-07-29T13:24:34.752Z"
     }
   ]
 }

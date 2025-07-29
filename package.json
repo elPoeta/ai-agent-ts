@@ -6,9 +6,9 @@
 		"start": "dotenvx run -f .env -- pnpm dlx tsx index.ts",
 		"start:local": "dotenvx run -f .env.local -- pnpm dlx tsx index.ts",
 		"start:qwen3": "dotenvx run -f .env.qwen -- pnpm dlx tsx index.ts",
-		"start:llama": "dotenvx run --env-file=.env.llama -- pnpm dlx tsx index.ts",
-		"start:mistral": "dotenvx run --env-file=.env.mistral -- pnpm dlx tsx index.ts",
-		"start:deepseek": "dotenvx run --env-file=.env.deepseek -- pnpm dlx tsx index.ts",
+		"start:llama": "dotenvx run -f .env.llama -- pnpm dlx tsx index.ts",
+		"start:mistral": "dotenvx run -f .env.mistral -- pnpm dlx tsx index.ts",
+		"start:deepseek": "dotenvx run -f .env.deepseek -- pnpm dlx tsx index.ts",
 		"eval": "pnpm dlx tsx evals/run.ts $1",
 		"ingest": "pnpm dlx tsx src/rag/ingest.ts",
 		"run:file": "pnpm dlx tsx $1"
