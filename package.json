@@ -3,7 +3,12 @@
 	"module": "index.ts",
 	"type": "module",
 	"scripts": {
-		"start": "pnpm dlx tsx index.ts",
+		"start": "dotenvx run -f .env -- pnpm dlx tsx index.ts",
+		"start:local": "dotenvx run -f .env.local -- pnpm dlx tsx index.ts",
+		"start:qwen3": "dotenvx run -f .env.qwen -- pnpm dlx tsx index.ts",
+		"start:llama": "dotenvx run --env-file=.env.llama -- pnpm dlx tsx index.ts",
+		"start:mistral": "dotenvx run --env-file=.env.mistral -- pnpm dlx tsx index.ts",
+		"start:deepseek": "dotenvx run --env-file=.env.deepseek -- pnpm dlx tsx index.ts",
 		"eval": "pnpm dlx tsx evals/run.ts $1",
 		"ingest": "pnpm dlx tsx src/rag/ingest.ts",
 		"run:file": "pnpm dlx tsx $1"
@@ -15,15 +20,15 @@
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
+		"@dotenvx/dotenvx": "^1.48.3",
 		"autoevals": "^0.0.101",
 		"chalk": "^5.3.0",
-		"sqlite3": "latest",
 		"csv-parse": "^5.5.6",
-		"dotenv": "^16.4.5",
 		"got": "^14.4.4",
 		"lowdb": "^7.0.1",
 		"openai": "latest",
 		"ora": "^8.1.1",
+		"sqlite3": "latest",
 		"terminal-image": "^3.0.0",
 		"tsx": "^4.19.2",
 		"uuid": "^11.0.2",
