@@ -2,39 +2,37 @@
   "messages": [
     {
       "role": "user",
-      "content": "quisiera saber la disponibilidad desde el 2025-19-09 al 2025-10-15 para 4 personas",
-      "id": "ad61ac0e-4bf2-4f11-9f11-c64dff3d715b",
-      "createdAt": "2025-07-29T13:24:31.887Z"
+      "content": "deseo saber la disponibiladad desde el 2025-10-15 hasta el 2025-10-20 para 4 personas",
+      "id": "d92a33d3-6f9e-44ed-9d51-c450a87aa52b",
+      "createdAt": "2025-07-30T00:16:11.882Z"
     },
     {
       "role": "assistant",
-      "content": "",
       "tool_calls": [
         {
-          "id": "call_ld6gxvxi",
-          "index": 0,
-          "type": "function",
           "function": {
-            "name": "disponibilidadSearch",
-            "arguments": "{\"cantidadPersonas\":\"4\",\"fechaFin\":\"2025-10-15\",\"fechaInicio\":\"2025-09-19\"}"
-          }
+            "arguments": "{\"fechaFin\":\"2025-10-20\",\"cantidadPersonas\":4,\"fechaInicio\":\"2025-10-15\"}",
+            "name": "disponibilidadSearch"
+          },
+          "id": "",
+          "type": "function"
         }
       ],
-      "id": "03e3f9d8-7f7d-4cf6-abc2-50a472a63999",
-      "createdAt": "2025-07-29T13:24:32.893Z"
+      "id": "3e9a55e7-8dcd-4101-ae6f-f9b011fdcc0f",
+      "createdAt": "2025-07-30T00:16:12.997Z"
     },
     {
       "role": "tool",
-      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-09-19\",\"fechaFin\":\"2025-10-15\",\"cantidadPersonas\":\"4\",\"diasSolicitados\":27},\"disponibles\":[{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":27},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":27},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":27}]}",
-      "tool_call_id": "call_ld6gxvxi",
-      "id": "92f70e09-7b11-4cbc-9fa9-544ec2d3ced9",
-      "createdAt": "2025-07-29T13:24:32.896Z"
+      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-10-15\",\"fechaFin\":\"2025-10-20\",\"cantidadPersonas\":4,\"diasSolicitados\":6},\"disponibles\":[{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":6},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 2\",\"capacidadMaxima\":6,\"cantidadDias\":6},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":6},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":6}]}",
+      "tool_call_id": "",
+      "id": "1b357d10-59b9-4170-8428-c0731af395ea",
+      "createdAt": "2025-07-30T00:16:13.000Z"
     },
     {
+      "content": "Tenemos disponibilidad para las fechas solicitadas, del 15 al 20 de octubre de 2025, para 4 personas.\n\nLas opciones disponibles son las siguientes habitaciones, todas con capacidad para hasta 6 personas y disponibles por 6 días:\n\n*   **Habitación 1**\n    *   Tipo de alojamiento: Habitación\n    *   Capacidad máxima: 6 personas\n    *   Cantidad de días disponibles: 6 días\n\n*   **Habitación 2**\n    *   Tipo de alojamiento: Habitación\n    *   Capacidad máxima: 6 personas\n    *   Cantidad de días disponibles: 6 días\n\n*   **Habitación 3**\n    *   Tipo de alojamiento: Habitación\n    *   Capacidad máxima: 6 personas\n    *   Cantidad de días disponibles: 6 días\n\n*   **Habitación 4**\n    *   Tipo de alojamiento: Habitación\n    *   Capacidad máxima: 6 personas\n    *   Cantidad de días disponibles: 6 días\n\nEn resumen, contamos con cuatro habitaciones (Habitación 1, Habitación 2, Habitación 3 y Habitación 4) que pueden alojar cómodamente a 4 personas durante los 6 días solicitados.",
       "role": "assistant",
-      "content": "Para tu solicitud de disponibilidad, tenemos los siguientes resultados:\n\n*   Habitación 1: Capacidad máxima para 6 personas. Disponibilidad: 27 días.\n*   Habitación 3: Capacidad máxima para 6 personas. Disponibilidad: 27 días.\n*   Habitación 4: Capacidad máxima para 6 personas. Disponibilidad: 27 días.\n\nEn total, tenemos 3 opciones de habitaciones disponibles durante la fecha solicitada.",
-      "id": "8a290d84-4858-457a-a38b-900fcce023ab",
-      "createdAt": "2025-07-29T13:24:34.752Z"
+      "id": "ab29eee1-de04-4c7d-b30b-dfd03ea0e58a",
+      "createdAt": "2025-07-30T00:16:17.470Z"
     }
   ]
 }
