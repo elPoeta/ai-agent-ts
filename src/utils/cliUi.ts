@@ -27,13 +27,13 @@ export const logMessage = (message: AIMessage) => {
 
 	// Don't log tool messages
 	if (role === 'tool') {
-         console.log("tool calling",message)
+		//console.log("tool calling", message)
 		return
 	}
 
 	// Log user messages (only have content)
 	if (role === 'user') {
-		console.log(`\n${color}[USER]${reset}`)
+		console.log(`\n${color}[ 👤 ]${reset}`)
 		console.log(`${message.content}\n`)
 		return
 	}
@@ -42,17 +42,20 @@ export const logMessage = (message: AIMessage) => {
 	if (role === 'assistant') {
 		// If has tool_calls, log function name and ask for approval if calendar
 		if ('tool_calls' in message && message.tool_calls) {
-			message.tool_calls.forEach((tool: any) => {
-				console.log(`\n${color}[ASSISTANT-TOOL]${reset}`)
-				console.log(`${tool.function.name}\n`)
+			const log = process.argv[2];
+			if (log) {
+				message.tool_calls.forEach((tool: any) => {
+					console.log(`\n${color}[ 🤖 🔧 ]${reset}`)
+					console.log(`${tool.function.name}\n`)
 
-			})
+				})
+			}
 			return
 		}
 
 		// If has content, log it
 		if (message.content) {
-			console.log(`\n${color}[ASSISTANT]${reset}`)
+			console.log(`\n${color}[ 🤖 ]${reset}`)
 			console.log(`${message.content}\n`)
 		}
 	}

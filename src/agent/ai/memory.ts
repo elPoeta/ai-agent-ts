@@ -29,7 +29,7 @@ const defaultData: Data = {
 }
 
 export const getDb = async () => {
-	const db = await JSONFilePreset<Data>('db.json', defaultData)
+	const db = await JSONFilePreset<Data>('memory.json', defaultData)
 	return db
 }
 

@@ -3,6 +3,64 @@ import { z } from 'zod'
 import type { Alojamiento } from '../../db/types';
 import { queryDisponibilidad } from '../../db/search'
 import { formatearResultadoParaLLM, validarConsulta, filtrarAlojamientosDisponibles, convertirParametrosAConsulta } from '../../utils/filter'
+import { parseDateToISO } from '../../utils/dateFormatter';
+/*
+export const disponibilidadToolDefinition = {
+	name: 'disponibilidadSearch',
+	parameters: z.object({
+		fechaInicio: z
+			.string()
+			.describe(
+				'Fecha de inicio de la reserva en formato YYYY-MM-DD. Se debe convertir automáticamente desde el formato que proporcione el usuario.'
+			)
+			.regex(/^\d{4}-\d{2}-\d{2}$/, 'El formato debe ser YYYY-MM-DD'),
+		fechaFin: z
+			.string()
+			.describe(
+				'Fecha de fin de la reserva en formato YYYY-MM-DD. Se debe convertir automáticamente desde el formato que proporcione el usuario.'
+			)
+			.regex(/^\d{4}-\d{2}-\d{2}$/, 'El formato debe ser YYYY-MM-DD'),
+		cantidadPersonas: z
+			.number()
+			.int()
+			.min(1, 'La cantidad mínima es 1 persona')
+			.max(6, 'La capacidad máxima es 6 personas')
+			.optional()
+			.describe(
+				'Cantidad de personas para la reserva (opcional). Si no se especifica, se mostrarán todas las opciones disponibles. Rango válido: 1-6 personas.'
+			),
+	})
+		.refine(
+			(data) => {
+				const inicio = new Date(data.fechaInicio);
+				const fin = new Date(data.fechaFin);
+				return inicio < fin;
+			},
+			{
+				message: 'La fecha de inicio debe ser anterior a la fecha de fin',
+				path: ['fechaFin'],
+			}
+		)
+		.refine(
+			(data) => {
+				const inicio = new Date(data.fechaInicio);
+				const hoy = new Date();
+				hoy.setHours(0, 0, 0, 0);
+				return inicio > hoy;
+			},
+			{
+				message: 'La fecha de inicio debe ser posterior a la fecha actual',
+				path: ['fechaInicio'],
+			}
+		),
+	description: `
+Busca disponibilidad de alojamientos entre fechas específicas. 
+USAR SOLO cuando el usuario proporcione fechas específicas para consultar disponibilidad.
+La herramienta valida fechas, filtra por cantidad de personas y devuelve alojamientos disponibles.
+NO usar para preguntas generales o conversación casual.
+`.trim(),
+};
+*/
 
 export const disponibilidadToolDefinition = {
 	name: 'disponibilidadSearch',
@@ -71,19 +129,33 @@ Usa exactamente las fechas proporcionadas por el usuario sin modificarlas ni inv
 type Args = z.infer<typeof disponibilidadToolDefinition.parameters>
 
 export const disponibilidadSearch: ToolFn<Args, string> = async ({ toolArgs }) => {
-	const { fechaInicio, fechaFin } = toolArgs
+	const { cantidadPersonas } = toolArgs
+	const fechaInicio = parseDateToISO(toolArgs.fechaInicio);
+	const fechaFin = parseDateToISO(toolArgs.fechaFin);
+	if (!fechaInicio || !fechaFin) {
+		return JSON.stringify({
+			error: true,
+			mensaje: "Error al formatear la fecha trate con el formato YYYY-MM-DD, Ejemplo: 2025-09-20",
+			tipo: "parse date error"
+		});
+	}
 
 	let results: Alojamiento[] = [];
 	try {
 		results = await queryDisponibilidad(fechaInicio, fechaFin) as Alojamiento[];
 		results = results.map(a => ({ ...a, fecha: new Date(a.fecha) }));
-		const consulta = convertirParametrosAConsulta(toolArgs);
+		const consulta = convertirParametrosAConsulta({ fechaInicio, fechaFin, cantidadPersonas });
 		const resultado = filtrarAlojamientosDisponibles(results, consulta);
 		return formatearResultadoParaLLM(resultado, consulta);
 	} catch (error) {
 		console.error("error consulta", error)
-		return 'Error: No se pudo procesasr la consulta sql.'
-		//return formatearResultadoParaLLM([], "");
+		return JSON.stringify({
+			error: true,
+			mensaje: "No se pudo procesar la solicitad. Intentelo mas tarde.",
+			tipo: "sql DB error"
+		});
+
+
 	}
 
 }

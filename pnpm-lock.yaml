@@ -20,6 +20,9 @@ importers:
       csv-parse:
         specifier: ^5.5.6
         version: 5.6.0
+      figlet:
+        specifier: ^1.8.2
+        version: 1.8.2
       got:
         specifier: ^14.4.4
         version: 14.4.7
@@ -32,6 +35,9 @@ importers:
       ora:
         specifier: ^8.1.1
         version: 8.2.0
+      readline-sync:
+        specifier: ^1.4.10
+        version: 1.4.10
       sqlite3:
         specifier: latest
         version: 5.1.7
@@ -51,9 +57,15 @@ importers:
         specifier: latest
         version: 4.0.10
     devDependencies:
+      '@types/figlet':
+        specifier: ^1.7.0
+        version: 1.7.0
       '@types/node':
         specifier: latest
         version: 24.1.0
+      '@types/readline-sync':
+        specifier: ^1.4.8
+        version: 1.4.8
 
 packages:
 
@@ -553,6 +565,9 @@ packages:
     resolution: {integrity: sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==}
     engines: {node: '>= 6'}
 
+  '@types/figlet@1.7.0':
+    resolution: {integrity: sha512-KwrT7p/8Eo3Op/HBSIwGXOsTZKYiM9NpWRBJ5sVjWP/SmlS+oxxRvJht/FNAtliJvja44N3ul1yATgohnVBV0Q==}
+
   '@types/http-cache-semantics@4.0.4':
     resolution: {integrity: sha512-1m0bIFVc7eJWyve9S0RnuRgcQqF/Xd5QsUZAZeQFr1Q3/p9JWoQQEqmVy+DPTNpGXwhgIetAoYF8JSc33q29QA==}
 
@@ -567,6 +582,9 @@ packages:
 
   '@types/node@24.1.0':
     resolution: {integrity: sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==}
+
+  '@types/readline-sync@1.4.8':
+    resolution: {integrity: sha512-BL7xOf0yKLA6baAX6MMOnYkoflUyj/c7y3pqMRfU0va7XlwHAOTOIo4x55P/qLfMsuaYdJJKubToLqRVmRtRZA==}
 
   '@xmldom/xmldom@0.8.10':
     resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
@@ -892,6 +910,11 @@ packages:
 
   fft.js@4.0.4:
     resolution: {integrity: sha512-f9c00hphOgeQTlDyavwTtu6RiK8AIFjD6+jvXkNkpeQ7rirK3uFWVpalkoS4LAwbdX7mfZ8aoBfFVQX1Re/8aw==}
+
+  figlet@1.8.2:
+    resolution: {integrity: sha512-iPCpE9B/rOcjewIzDnagP9F2eySzGeHReX8WlrZQJkqFBk2wvq8gY0c6U6Hd2y9HnX1LQcYSeP7aEHoPt6sVKQ==}
+    engines: {node: '>= 0.4.0'}
+    hasBin: true
 
   file-type@16.5.4:
     resolution: {integrity: sha512-/yFHK0aGjFEgDJjEKP0pWCplsPFPhwyfwevf/pVxiN0tmE4L9LmwWxWukdJSHdoCli4VgQLehjJtwQBnqmsKcw==}
@@ -1519,6 +1542,10 @@ packages:
   readable-web-to-node-stream@3.0.4:
     resolution: {integrity: sha512-9nX56alTf5bwXQ3ZDipHJhusu9NTQJ/CVPtb/XHAJCXihZeitfJvIRS4GqQ/mfIoOE3IelHMrpayVrosdHBuLw==}
     engines: {node: '>=8'}
+
+  readline-sync@1.4.10:
+    resolution: {integrity: sha512-gNva8/6UAe8QYepIQH/jQ2qn91Qj0B9sYjMBBs3QOB8F2CXcKgLxQaJRP76sWVRQt+QU+8fAkCbCvjjMFu7Ycw==}
+    engines: {node: '>= 0.8.0'}
 
   regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
@@ -2403,6 +2430,8 @@ snapshots:
   '@tootallnate/once@1.1.2':
     optional: true
 
+  '@types/figlet@1.7.0': {}
+
   '@types/http-cache-semantics@4.0.4': {}
 
   '@types/node-fetch@2.6.12':
@@ -2419,6 +2448,8 @@ snapshots:
   '@types/node@24.1.0':
     dependencies:
       undici-types: 7.8.0
+
+  '@types/readline-sync@1.4.8': {}
 
   '@xmldom/xmldom@0.8.10': {}
 
@@ -2786,6 +2817,8 @@ snapshots:
       picomatch: 4.0.3
 
   fft.js@4.0.4: {}
+
+  figlet@1.8.2: {}
 
   file-type@16.5.4:
     dependencies:
@@ -3496,6 +3529,8 @@ snapshots:
   readable-web-to-node-stream@3.0.4:
     dependencies:
       readable-stream: 4.7.0
+
+  readline-sync@1.4.10: {}
 
   regenerator-runtime@0.13.11: {}
 
