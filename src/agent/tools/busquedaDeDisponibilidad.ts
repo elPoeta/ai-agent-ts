@@ -63,7 +63,7 @@ NO usar para preguntas generales o conversación casual.
 */
 
 export const disponibilidadToolDefinition = {
-	name: 'disponibilidadSearch',
+	name: 'busquedaDeDisponibilidad',
 	parameters: z.object({
 		fechaInicio: z
 			.string()
@@ -128,7 +128,7 @@ Usa exactamente las fechas proporcionadas por el usuario sin modificarlas ni inv
 
 type Args = z.infer<typeof disponibilidadToolDefinition.parameters>
 
-export const disponibilidadSearch: ToolFn<Args, string> = async ({ toolArgs }) => {
+export const busquedaDeDisponibilidad: ToolFn<Args, string> = async ({ toolArgs }) => {
 	const { cantidadPersonas } = toolArgs
 	const fechaInicio = parseDateToISO(toolArgs.fechaInicio);
 	const fechaFin = parseDateToISO(toolArgs.fechaFin);

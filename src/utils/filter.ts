@@ -1,5 +1,5 @@
 import type { Alojamiento } from '../db/types'
-import { disponibilidadToolDefinition } from '../agent/tools/disponibilidadSearch'
+import { disponibilidadToolDefinition } from '../agent/tools/busquedaDeDisponibilidad'
 import { z } from 'zod'
 
 export interface AlojamientoDisponible {

@@ -2,7 +2,7 @@ function requiresAvailabilitySearch(message: string) {
 	const availabilityKeywords = [
 		'disponibilidad', 'disponible', 'libre', 'reservar', 'reserva',
 		'fechas', 'fecha', 'cabaña', 'cabañas', 'habitación', 'habitaciones',
-		'alojamiento', 'hospedaje', 'estadía', 'estancia', 'noches'
+		'alojamiento', 'hospedaje', 'estadía', 'estancia', 'noches', 'personas'
 	];
 
 	const messageLower = message.toLowerCase();
@@ -40,12 +40,13 @@ function requiresAvailabilitySearchStrict(message: string) {
 		/habitación.*libre.*\d{4}/i,
 		/consultar.*fechas/i,
 		/verificar.*disponibilidad/i,
-		/(quiero|necesito|busco).*(reservar|reserva)/i
+		/(quiero|necesito|busco).*(reservar|reserva)/i,
+		/(personas|somos).*\d/i
 	];
 
 	// Verificar si el mensaje coincide con algún patrón específico
 	const matchesPattern = availabilityPatterns.some(pattern =>
-		pattern.test(message)
+		pattern.test(messageLower)
 	);
 
 	// Verificar si contiene fechas en formato reconocible
@@ -54,9 +55,11 @@ function requiresAvailabilitySearchStrict(message: string) {
 		/\d{1,2}[-\/]\d{1,2}[-\/]\d{2,4}/,
 	];
 
-	const hasDates = datePatterns.some(pattern => pattern.test(message));
+	const hasDates = datePatterns.some(pattern => pattern.test(messageLower));
 
-	return matchesPattern || (hasDates && messageLower.includes('disponib'));
+	//return matchesPattern || (hasDates && messageLower.includes('disponib'));
+	return matchesPattern || hasDates;
+
 }
 
 // Sistema de puntuación para mayor precisión
@@ -77,7 +80,7 @@ function calculateAvailabilityScore(message: string) {
 	});
 
 	// Palabras de contexto temporal (+1 punto cada una)
-	const timeKeywords = ['fecha', 'fechas', 'desde', 'hasta', 'entre'];
+	const timeKeywords = ['fecha', 'fechas', 'desde', 'hasta', 'entre', 'personas'];
 	timeKeywords.forEach(keyword => {
 		if (messageLower.includes(keyword)) score += 1;
 	});

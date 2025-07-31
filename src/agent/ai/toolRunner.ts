@@ -1,5 +1,5 @@
 import type OpenAI from 'openai'
-import { disponibilidadSearch, disponibilidadToolDefinition } from '../tools/disponibilidadSearch'
+import { busquedaDeDisponibilidad, disponibilidadToolDefinition } from '../tools/busquedaDeDisponibilidad'
 
 export const runTool = async (
 	toolCall: OpenAI.Chat.Completions.ChatCompletionMessageToolCall,
@@ -13,7 +13,7 @@ export const runTool = async (
 	switch (toolCall.function.name) {
 
 		case disponibilidadToolDefinition.name:
-			return disponibilidadSearch(input);
+			return busquedaDeDisponibilidad(input);
 
 		default:
 			return `Never run this tool: ${toolCall.function.name} again, or else!`

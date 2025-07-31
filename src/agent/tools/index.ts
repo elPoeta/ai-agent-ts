@@ -1,3 +1,3 @@
-import { disponibilidadToolDefinition } from './disponibilidadSearch'
+import { disponibilidadToolDefinition } from './busquedaDeDisponibilidad'
 
 export const tools = [disponibilidadToolDefinition];
