@@ -1,3 +1,38 @@
 {
-  "messages": []
+  "messages": [
+    {
+      "role": "user",
+      "content": "quiero saber la disponibilidad desde el 2025-10-05 al 2025-10-15",
+      "id": "f6e6f5e3-4d7b-475d-be29-a9ffc79a104e",
+      "createdAt": "2025-08-01T23:36:00.286Z"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "function": {
+            "arguments": "{\"fechaFin\":\"2025-10-15\",\"fechaInicio\":\"2025-10-05\"}",
+            "name": "busquedaDeDisponibilidad"
+          },
+          "id": "",
+          "type": "function"
+        }
+      ],
+      "id": "20fe345d-19b2-4e27-89f5-d07fc4cc3b9a",
+      "createdAt": "2025-08-01T23:36:01.420Z"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-10-05\",\"fechaFin\":\"2025-10-15\",\"diasSolicitados\":11},\"disponibles\":[{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Este\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Oeste\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":11}]}",
+      "tool_call_id": "",
+      "id": "3badeb15-6229-4773-90c3-70e7e4cb9003",
+      "createdAt": "2025-08-01T23:36:01.423Z"
+    },
+    {
+      "content": "¡Claro! Con gusto te informo sobre la disponibilidad.\n\nPara las fechas del 5 de octubre de 2025 al 15 de octubre de 2025 (11 días), tenemos las siguientes opciones disponibles:\n\n*   **Cabañas:**\n    *   Cabaña Este (capacidad máxima 2 personas)\n    *   Cabaña Oeste (capacidad máxima 2 personas)\n\n*   **Habitaciones:**\n    *   Habitación 1 (capacidad máxima 6 personas)\n    *   Habitación 3 (capacidad máxima 6 personas)\n    *   Habitación 4 (capacidad máxima 6 personas)\n\nTodas estas opciones están disponibles durante los 11 días solicitados.",
+      "role": "assistant",
+      "id": "f356c6d0-e9b6-4d53-b0e8-444aeb341a07",
+      "createdAt": "2025-08-01T23:36:02.391Z"
+    }
+  ]
 }
