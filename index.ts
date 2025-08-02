@@ -3,7 +3,7 @@ import { runAgent } from './src/agent/ai/agent'
 import { tools } from './src/agent/tools'
 import { clearMessages } from './src/agent/ai/memory'
 import figlet from 'figlet';
-import readlineSync from 'readline-sync';
+import { input } from '@inquirer/prompts'
 import chalk from 'chalk'
 
 
@@ -16,7 +16,7 @@ let userMessage: string;
 const prompt = async () => {
 
 	do {
-		userMessage = readlineSync.question('👤 > ');
+		userMessage = await input({ message: '👤 >' });
 
 		if (userMessage.toLowerCase() !== 'q') {
 			await runAgent({ userMessage, tools });

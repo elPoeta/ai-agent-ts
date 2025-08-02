@@ -1,7 +1,7 @@
 import type { AIMessage } from "../types";
 import { openai } from './ai'
 import { systemPrompt as defaultSystemPrompt } from '../ai/systemPrompt';
-import { z } from 'zod'
+import { z } from 'zod4'
 import type { ChatCompletionTool } from 'openai/resources/chat/completions'
 
 

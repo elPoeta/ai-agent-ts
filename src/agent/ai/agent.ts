@@ -19,7 +19,7 @@ export const runAgent = async ({
 		const history = await getMessages()
 
 		// Decidir si usar tools basado en el contenido del mensaje
-		const shouldUseTools = detectAvailabilityQuery.basic(userMessage)
+		const shouldUseTools = process.env.SMART === 'false' ? detectAvailabilityQuery.basic(userMessage) : true;
 		const toolsToUse = shouldUseTools ? tools : []
 
 		// Log para debugging (puedes remover después)

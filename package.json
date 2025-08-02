@@ -1,5 +1,5 @@
 {
-	"name": "agents-test",
+	"name": "hostr-ai-agent",
 	"module": "index.ts",
 	"type": "module",
 	"scripts": {
@@ -16,15 +16,14 @@
 	},
 	"devDependencies": {
 		"@types/figlet": "^1.7.0",
-		"@types/node": "latest",
-		"@types/readline-sync": "^1.4.8"
+		"@types/node": "latest"
 	},
 	"peerDependencies": {
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
 		"@dotenvx/dotenvx": "^1.48.3",
-		"autoevals": "^0.0.101",
+		"@inquirer/prompts": "^7.5.3",
 		"chalk": "^5.3.0",
 		"csv-parse": "^5.5.6",
 		"figlet": "^1.8.2",
@@ -32,11 +31,11 @@
 		"lowdb": "^7.0.1",
 		"openai": "latest",
 		"ora": "^8.1.1",
-		"readline-sync": "^1.4.10",
 		"sqlite3": "latest",
 		"terminal-image": "^3.0.0",
 		"tsx": "^4.19.2",
 		"uuid": "^11.0.2",
-		"zod": "latest"
+		"zod3": "npm:zod@^3.25.76",
+		"zod4": "npm:zod@^4.0.14"
 	}
 }

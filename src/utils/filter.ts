@@ -1,6 +1,6 @@
 import type { Alojamiento } from '../db/types'
 import { disponibilidadToolDefinition } from '../agent/tools/busquedaDeDisponibilidad'
-import { z } from 'zod'
+import { z } from 'zod4'
 
 export interface AlojamientoDisponible {
 	tipo: 'cabaña' | 'habitacion';

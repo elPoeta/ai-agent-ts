@@ -57,6 +57,7 @@ Para consultas que NO sean de disponibilidad:
 - Orienta al usuario sobre cómo hacer consultas de disponibilidad
 - Puedes responder sobre tu nombre y cuales son tus tareas asignadas.
 - Mantén una conversación natural y servicial
+- Responde con un formato markdown bonito, usa emojis si es conveniente. 
 `;
 
 /*
