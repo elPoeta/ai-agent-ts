@@ -2,49 +2,39 @@
   "messages": [
     {
       "role": "user",
-      "content": "Hola como estas mi nombre es leo",
-      "id": "7466a5da-cf31-40ae-a388-dde12b00908b",
-      "createdAt": "2025-08-02T21:30:52.684Z"
-    },
-    {
-      "content": "¡Hola Leo! 👋 Soy Hoster-IA, un asistente virtual diseñado para ayudarte a encontrar el alojamiento perfecto. Estoy aquí para informarte sobre la disponibilidad de nuestras cabañas y habitaciones. ¿En qué puedo ayudarte hoy? 😊\n",
-      "role": "assistant",
-      "id": "2c6de43d-7134-4170-b377-e44ad0954019",
-      "createdAt": "2025-08-02T21:30:54.785Z"
-    },
-    {
-      "role": "user",
-      "content": "me podrias indicar la disponibilidad entre el 2025-10-05 y el 2025-10-15",
-      "id": "79d94799-13ce-4d18-87ad-38bbe4495657",
-      "createdAt": "2025-08-02T21:31:10.369Z"
+      "content": "quiero consultar sobre la disponibilidad entre los dias 5/10/25 y 15/10/25",
+      "id": "7243503b-8b9d-45e2-8be6-777ff6562a8f",
+      "createdAt": "2025-08-03T20:26:00.856Z"
     },
     {
       "role": "assistant",
+      "content": "",
       "tool_calls": [
         {
+          "id": "call_dajs8x5v",
+          "index": 0,
+          "type": "function",
           "function": {
-            "arguments": "{\"fechaInicio\":\"2025-10-05\",\"fechaFin\":\"2025-10-15\"}",
-            "name": "busquedaDeDisponibilidad"
-          },
-          "id": "",
-          "type": "function"
+            "name": "busquedaDeDisponibilidad",
+            "arguments": "{\"cantidadPersonas\":null,\"fechaFin\":\"15/10/25\",\"fechaInicio\":\"05/10/25\"}"
+          }
         }
       ],
-      "id": "a02c9311-b9e1-4350-9213-3b45b83ede2c",
-      "createdAt": "2025-08-02T21:31:12.081Z"
+      "id": "0131db60-9c1d-4fa0-9b2b-9e906f043403",
+      "createdAt": "2025-08-03T20:26:02.015Z"
     },
     {
       "role": "tool",
-      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-10-05\",\"fechaFin\":\"2025-10-15\",\"diasSolicitados\":11},\"disponibles\":[{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Este\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Oeste\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":11}]}",
-      "tool_call_id": "",
-      "id": "4f8fdfe1-cc6c-4bcf-94e3-f3e17c220fe4",
-      "createdAt": "2025-08-02T21:31:12.086Z"
+      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-10-05\",\"fechaFin\":\"2025-10-15\",\"cantidadPersonas\":null,\"diasSolicitados\":11},\"disponibles\":[{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Este\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Oeste\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":11}]}",
+      "tool_call_id": "call_dajs8x5v",
+      "id": "70984bd2-30c0-40ac-a6ef-b50f3042690e",
+      "createdAt": "2025-08-03T20:26:02.027Z"
     },
     {
-      "content": "¡Excelente! Tenemos varias opciones disponibles entre el 2025-10-05 y el 2025-10-15 (11 días en total):\n\n*   **Cabañas:**\n    *   Cabaña Este (capacidad máxima 2 personas)\n    *   Cabaña Oeste (capacidad máxima 2 personas)\n*   **Habitaciones:**\n    *   Habitación 1 (capacidad máxima 6 personas)\n    *   Habitación 3 (capacidad máxima 6 personas)\n    *   Habitación 4 (capacidad máxima 6 personas)\n\n¿Te gustaría saber algo más sobre alguna de estas opciones? 😊\n",
       "role": "assistant",
-      "id": "7a1aaa40-ee3d-4092-96d2-7ee2879b6526",
-      "createdAt": "2025-08-02T21:31:13.513Z"
+      "content": "¡Excelente! He encontrado disponibilidad para tus fechas solicitadas.\n\n**Disponibilidad de alojamientos:**\n\n*   **Cabaña Este**: Disponible durante 11 días, desde el 5 de octubre hasta el 15 de octubre.\n*   **Cabaña Oeste**: Disponible durante 11 días, desde el 5 de octubre hasta el 15 de octubre.\n*   **Habitación 1**: Disponible durante 11 días, desde el 5 de octubre hasta el 15 de octubre.\n*   **Habitación 3**: Disponible durante 11 días, desde el 5 de octubre hasta el 15 de octubre.\n*   **Habitación 4**: Disponible durante 11 días, desde el 5 de octubre hasta el 15 de octubre.\n\nEspero que esta información te sea útil. Si necesitas más detalles o tienes alguna otra pregunta, no dudes en preguntar.",
+      "id": "c73f70c8-f87a-417e-a75a-2f0b930c761d",
+      "createdAt": "2025-08-03T20:26:05.822Z"
     }
   ]
 }

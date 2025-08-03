@@ -118,26 +118,15 @@ export const disponibilidadToolDefinition = {
  • Obtener información detallada sobre capacidades y disponibilidad 
  • Validar automáticamente fechas y parámetros de entrada TIPOS DE ALOJAMIENTO: 
     - Cabañas: Capacidad máxima 2 personas, ideales para parejas 
- - Habitaciones: Capacidad máxima 6 personas, perfectas para familias o grupos VALIDACIONES AUTOMÁTICAS: 
-    - Las fechas deben estar en formato YYYY-MM-DD - La fecha de inicio debe ser futura (posterior a hoy) 
+ - Habitaciones: Capacidad máxima 6 personas, perfectas para familias o grupos VALIDACIONES AUTOMÁTICAS:
+    - Las fechas deben estar en formato YYYY-MM-DD 
+    - La fecha de inicio debe ser futura (posterior a hoy) 
     - La fecha de fin debe ser posterior a la fecha de inicio 
     - La cantidad de personas debe estar entre 1 y 6 RESPUESTA: Devuelve un JSON estructurado con los alojamientos disponibles, incluyendo: 
-        - Tipo de alojamiento (cabaña/habitación) - Código/nombre del alojamiento 
-        - Capacidad máxima 
-        - Días disponibles en el período consultado 
+	- Tipo de alojamiento (cabaña/habitación) - Código/nombre del alojamiento 
+	- Capacidad máxima 
+	- Días disponibles en el período consultado 
  - Resumen de opciones disponibles Uso recomendado: Cuando el usuario mencione fechas específicas o solicite información sobre disponibilidad para hacer reservas.`.trim()
-	/*
-		description: `
-	Busca la disponibilidad de alojamientos entre dos fechas específicas. 
-	Esta herramienta:
-	- Valida automáticamente que las fechas sean correctas y futuras
-	- Filtra los resultados según la cantidad de personas si se especifica
-	- Devuelve solo los alojamientos que estén completamente disponibles durante todo el período
-	- Considera cabañas (hasta 2 personas) y habitaciones (hasta 6 personas)
-	- Si no se especifica cantidad de personas, muestra todas las opciones disponibles
-	
-	Usa exactamente las fechas proporcionadas por el usuario sin modificarlas ni inventarlas.
-	`.trim(),*/
 };
 
 type Args = z.infer<typeof disponibilidadToolDefinition.parameters>
