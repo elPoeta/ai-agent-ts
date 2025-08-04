@@ -1,10 +1,10 @@
 import { showLoader } from "../utils/cliUi.ts";
-import { db } from "./connection.ts";
+import { getDb as db } from "./connection.ts";
 
-const loader = showLoader("Creating database...");
+//const loader = showLoader("Creating database...");
 
-db.run(
-  `
+await db().all(
+	`
     CREATE TABLE IF NOT EXISTS alojamiento (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       fecha TEXT UNIQUE,
@@ -14,13 +14,5 @@ db.run(
       hab2 TEXT,
       hab3 TEXT,
       hab4 TEXT
-    )
-  `,
-  (err) => {
-    if (err) {
-      loader.fail(`Table creation failed: ${err.message}`);
-    } else {
-      loader.succeed("✅ Database created successfully.");
-    }
-  },
+    )`
 );
