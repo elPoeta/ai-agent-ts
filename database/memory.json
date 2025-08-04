@@ -1,0 +1,52 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "hola me llamo leo",
+      "id": "b0f0052a-e3c1-464b-ac14-0bb83dfae409",
+      "createdAt": "2025-08-04T10:55:33.173Z"
+    },
+    {
+      "role": "assistant",
+      "content": "**¡Hola Leo!**\n\nMe alegra conocerte. Soy Hoster-IA, tu asistente de alojamiento. Estoy aquí para ayudarte a encontrar la cabaña o habitación perfecta para tus necesidades.\n\n¿En qué puedo ayudarte hoy? ¿Estás buscando una reserva con fechas específicas o simplemente quieres obtener más información sobre nuestros servicios?",
+      "id": "638e19dc-eaf2-4777-b160-d33580c4adee",
+      "createdAt": "2025-08-04T10:55:37.288Z"
+    },
+    {
+      "role": "user",
+      "content": "hay disponibilidad entre el 2025-08-11 y el 2025-08-21",
+      "id": "b4180796-a895-43f6-9d69-7ac87793859a",
+      "createdAt": "2025-08-04T10:56:19.463Z"
+    },
+    {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+        {
+          "id": "call_gqi7rucz",
+          "index": 0,
+          "type": "function",
+          "function": {
+            "name": "busquedaDeDisponibilidad",
+            "arguments": "{\"cantidadPersonas\":null,\"fechaFin\":\"2025-08-21\",\"fechaInicio\":\"2025-08-11\"}"
+          }
+        }
+      ],
+      "id": "eb845dcd-05aa-4294-a9a2-3ed7ee0d3ebc",
+      "createdAt": "2025-08-04T10:56:20.692Z"
+    },
+    {
+      "role": "tool",
+      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-08-11\",\"fechaFin\":\"2025-08-21\",\"cantidadPersonas\":null,\"diasSolicitados\":11},\"disponibles\":[{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Este\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Oeste\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 2\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":11}]}",
+      "tool_call_id": "call_gqi7rucz",
+      "id": "0d32dd20-ebaa-4f7d-ae76-00f0253a4abf",
+      "createdAt": "2025-08-04T10:56:20.711Z"
+    },
+    {
+      "role": "assistant",
+      "content": "**¡Excelente!**\n\nHe encontrado disponibilidad para ti entre el 11 de agosto de 2025 y el 21 de agosto de 2025. Aquí te presento las opciones que tengo disponibles:\n\n*   **Cabaña Este**: Capacidad máxima 2 personas, cantidad de días disponibles: 11\n*   **Cabaña Oeste**: Capacidad máxima 2 personas, cantidad de días disponibles: 11\n*   **Habitación 1**: Capacidad máxima 6 personas, cantidad de días disponibles: 11\n*   **Habitación 2**: Capacidad máxima 6 personas, cantidad de días disponibles: 11\n*   **Habitación 3**: Capacidad máxima 6 personas, cantidad de días disponibles: 11\n*   **Habitación 4**: Capacidad máxima 6 personas, cantidad de días disponibles: 11\n\n¿Te gustaría reservar una de estas opciones?",
+      "id": "67b4cf6d-766d-424d-a89b-98a7f790837e",
+      "createdAt": "2025-08-04T10:56:24.539Z"
+    }
+  ]
+}

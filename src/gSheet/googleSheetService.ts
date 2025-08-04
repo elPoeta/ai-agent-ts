@@ -1,8 +1,9 @@
 import { google } from 'googleapis';
 import * as fs from 'fs';
-import * as path from 'path';
+import { getPath } from "../config/pathResolver"
+import { config } from '../config/config'
 
-// Tipos para mejor tipado
+
 interface SheetData {
 	range: string;
 	majorDimension: string;
@@ -64,7 +65,7 @@ class GoogleSheetsService {
 	}
 
 	// Leer datos de una hoja
-	async readSheet(range: string = 'A1:Z1000'): Promise<string[][]> {
+	async readSheet(range: string = '!A1:Z'): Promise<string[][]> {
 		try {
 			const response = await this.sheets.spreadsheets.values.get({
 				spreadsheetId: this.spreadsheetId,
@@ -153,21 +154,21 @@ class GoogleSheetsService {
 	}
 }
 
-// Ejemplo de uso
 async function main() {
 	try {
+		console.log(config)
 		// Reemplaza con tu ID de Google Sheets
-		const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+		const spreadsheetId = config.google.spreadsheetId;
 		const sheetsService = new GoogleSheetsService(spreadsheetId!);
 
 		// Opción 1: Usar Service Account
-		await sheetsService.authenticateServiceAccount('./hoster-ai-cred.json');
+		await sheetsService.authenticateServiceAccount(getPath('credentials', config.google.serviceAccountFile!));
 
 		// Opción 2: Usar API Key (solo para lectura)
 		// sheetsService.authenticateWithApiKey('TU_API_KEY_AQUI');
 
 		// Leer datos
-		const data = await sheetsService.readSheet('Hoja1!A1:D10');
+		const data = await sheetsService.readSheet(`${config.sync.sheetName}!${config.sync.sheetRange}`);
 		console.log('Datos leídos:', data);
 
 

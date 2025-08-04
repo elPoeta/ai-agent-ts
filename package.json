@@ -12,7 +12,7 @@
 		"start:deepseek": "dotenvx run -f .env.deepseek -- pnpm dlx tsx index.ts",
 		"eval": "pnpm dlx tsx evals/run.ts $1",
 		"ingest": "pnpm dlx tsx src/rag/ingest.ts",
-		"run:file": "pnpm dlx tsx $1"
+		"run:file": "dotenvx run -f .env.local -- pnpm dlx tsx $1"
 	},
 	"devDependencies": {
 		"@types/figlet": "^1.7.0",

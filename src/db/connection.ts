@@ -1,9 +1,10 @@
 import sqlite3 from "sqlite3";
 import { showLoader } from "../utils/cliUi";
+import { getPath } from "../config/pathResolver"
 
 const loader = showLoader("");
 
-export const db = new sqlite3.Database("alojamiento.db", (err) => {
+export const db = new sqlite3.Database(getPath("database", "alojamiento.db"), (err) => {
 	if (err) {
 		loader.fail(` Error al abrir la base de datos: ${err.message}`);
 	} else {

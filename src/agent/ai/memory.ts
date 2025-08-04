@@ -1,6 +1,7 @@
 import { JSONFilePreset } from 'lowdb/node'
 import type { AIMessage } from '../types'
 import { v4 as uuidv4 } from 'uuid'
+import { getPath } from "../../config/pathResolver"
 
 export type MessageWithMetadata = AIMessage & {
 	id: string
@@ -29,7 +30,7 @@ const defaultData: Data = {
 }
 
 export const getDb = async () => {
-	const db = await JSONFilePreset<Data>('memory.json', defaultData)
+	const db = await JSONFilePreset<Data>(getPath('database', 'memory.json'), defaultData)
 	return db
 }
 

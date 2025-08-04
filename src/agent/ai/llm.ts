@@ -3,6 +3,7 @@ import { openai } from './ai'
 import { systemPrompt as defaultSystemPrompt } from '../ai/systemPrompt';
 import { z } from 'zod4'
 import type { ChatCompletionTool } from 'openai/resources/chat/completions'
+import { config } from '../../config/config'
 
 
 export const runLLM = async ({
@@ -25,7 +26,7 @@ export const runLLM = async ({
 		},
 	}));
 
-	const model = process.env.MODEL || "";
+	const model = config.ai.model;
 
 	// Configuración condicional de tool_choice
 	const chatConfig: any = {
