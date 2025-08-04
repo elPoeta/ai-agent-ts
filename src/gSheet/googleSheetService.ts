@@ -179,9 +179,6 @@ async function main() {
 }
 
 
-main();
-
-
 export { GoogleSheetsService };
 
 // Configuración adicional para manejo de errores y reintentos

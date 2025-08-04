@@ -54,10 +54,7 @@ class SQLiteSyncService {
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
         )`;
-
 		await this.db.all(createTableSQL);
-		await this.db.close();
-
 	}
 
 	// Convertir fecha de formato DD/M/YYYY a formato ISO (YYYY-MM-DD)
@@ -85,10 +82,10 @@ class SQLiteSyncService {
 
 	// Convertir fila de sheet a objeto tipado
 	private parseSheetRow(row: string[], index: number): SheetRow | null {
-		if (!row || row.length < 7) {
-			console.warn(`Fila ${index + 1}: Datos insuficientes`, row);
-			return null;
-		}
+		//if (!row || row.length < 7) {
+		//	console.warn(`Fila ${index + 1}: Datos insuficientes`, row);
+		//	return null;
+		//	}
 
 		const fecha = this.parseDate(row[0]);
 		if (!fecha) {
@@ -110,10 +107,8 @@ class SQLiteSyncService {
 	// Verificar si una fecha ya existe en la base de datos
 	private async dateExists(fecha: string): Promise<boolean> {
 		const sql = `SELECT COUNT(*) as count FROM ${this.tableName} WHERE fecha = ?`;
-
 		const row = await this.db.all(sql, [fecha]);
-		await this.db.close();
-		return row && row.length > 0;
+		return row && row.length > 0 ? row[0].count > 0 : false;
 
 	}
 
@@ -136,7 +131,6 @@ class SQLiteSyncService {
 		];
 
 		await this.db.all(sql, params);
-		await this.db.close();
 	}
 
 	// Sincronizar datos desde Google Sheets
@@ -205,18 +199,14 @@ class SQLiteSyncService {
 	// Obtener todas las fechas existentes en la base de datos
 	async getExistingDates(): Promise<string[]> {
 		const sql = `SELECT fecha FROM ${this.tableName} ORDER BY fecha`;
-
 		const rows = await this.db.all(sql, []);
-		await this.db.close();
 		return rows.map(row => row.fecha);
 	}
 
 	// Obtener todos los registros
 	async getAllRecords(): Promise<SheetRow[]> {
 		const sql = `SELECT fecha, cabE, cabO, hab1, hab2, hab3, hab4 FROM ${this.tableName} ORDER BY fecha`;
-
 		const rows = await this.db.all(sql, []);
-		await this.db.close();
 		return rows;
 	}
 
@@ -228,19 +218,14 @@ class SQLiteSyncService {
         WHERE fecha BETWEEN ? AND ? 
         ORDER BY fecha
       `;
-
 		const rows = await this.db.all(sql, [startDate, endDate]);
-
-		await this.db.close();
 		return rows;
 	}
 
 	// Limpiar todos los datos (útil para testing)
 	async clearAllData(): Promise<void> {
 		const sql = `DELETE FROM ${this.tableName}`;
-
 		await this.db.all(sql, []);
-		await this.db.close();
 	}
 
 	// Método para hacer backup de la base de datos
@@ -265,6 +250,10 @@ class SQLiteSyncService {
 						});
 						*/
 		});
+	}
+
+	async close() {
+		await this.db.close();
 	}
 }
 

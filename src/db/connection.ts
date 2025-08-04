@@ -15,7 +15,8 @@ export interface SqliteDbInstance {
 export type SqliteDatabase = () => SqliteDbInstance;
 
 export const getDb: SqliteDatabase = () => {
-	const db = new sqlite3.Database(getPath("database", "alojamiento.db"), sqlite3.OPEN_READWRITE);
+	console.log(getPath("database", "alojamiento.db"))
+	const db = new sqlite3.Database(getPath("database", "alojamiento.db"));
 
 	return {
 		all: ((sql: string, params?: any[]) =>
@@ -29,8 +30,6 @@ export const getDb: SqliteDatabase = () => {
 		close: promisify(db.close.bind(db))
 	};
 };
-
-
 
 /*
 export const db = new sqlite3.Database(getPath("database", "alojamiento.db"), (err) => {
