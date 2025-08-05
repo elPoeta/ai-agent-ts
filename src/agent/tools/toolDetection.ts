@@ -2,13 +2,22 @@ function requiresAvailabilitySearch(message: string) {
 	const availabilityKeywords = [
 		'disponibilidad', 'disponible', 'libre', 'reservar', 'reserva',
 		'fechas', 'fecha', 'cabaña', 'cabañas', 'habitación', 'habitaciones',
-		'alojamiento', 'hospedaje', 'estadía', 'estancia', 'noches', 'personas'
+		'alojamiento', 'hospedaje', 'estadía', 'estancia', 'noches', 'personas', 'sync',
+		'sincronizar', 'sincroniza', 'actualiza', 'actualizar', 'db', 'bd', 'base de datos', 'sheet', 'sheets', 'hoja de calculo'
+	];
+	const availabilitySyncKeywords = [
+		'sync', 'sincronizar', 'sincroniza', 'actualiza', 'actualizar', 'db', 'bd',
+		'base de datos', 'sheet', 'sheets', 'hoja de calculo'
 	];
 
 	const messageLower = message.toLowerCase();
 
 	// Verificar palabras clave de disponibilidad
 	const hasKeywords = availabilityKeywords.some(keyword =>
+		messageLower.includes(keyword)
+	);
+
+	const hasSyncKeywords = availabilitySyncKeywords.some(keyword =>
 		messageLower.includes(keyword)
 	);
 
@@ -24,7 +33,7 @@ function requiresAvailabilitySearch(message: string) {
 	const hasDates = datePatterns.some(pattern => pattern.test(message));
 
 	// Solo considerar que requiere tool si tiene AMBOS: keywords Y fechas
-	return hasKeywords && hasDates;
+	return hasSyncKeywords || (hasKeywords && hasDates);
 }
 
 function requiresAvailabilitySearchStrict(message: string) {
@@ -41,7 +50,9 @@ function requiresAvailabilitySearchStrict(message: string) {
 		/consultar.*fechas/i,
 		/verificar.*disponibilidad/i,
 		/(quiero|necesito|busco).*(reservar|reserva)/i,
-		/(personas|somos).*\d/i
+		/(personas|somos).*\d/i,
+		/(sync|sincronizar|sincroniza|actualizar|actualiza|base de datos|bd|db).*/i,
+		/(sheet|sheets|hoja de calculo).*/i
 	];
 
 	// Verificar si el mensaje coincide con algún patrón específico
@@ -94,6 +105,13 @@ function calculateAvailabilityScore(message: string) {
 	if (datePatterns.some(pattern => pattern.test(message))) {
 		score += 4;
 	}
+
+	// Palabras clave sync-db (+3 puntos cada una)
+	const syncKeywords = ['sync', 'sincronizar', 'sincroniza', 'actualizar', 'actualiza', 'base de datos', 'db', 'bd', 'sheet', 'sheets', 'hoja de calculo'];
+	syncKeywords.forEach(keyword => {
+		if (messageLower.includes(keyword)) score += 3;
+	});
+
 
 	// Threshold: necesita al menos 5 puntos para activar la tool
 	return score >= 5;

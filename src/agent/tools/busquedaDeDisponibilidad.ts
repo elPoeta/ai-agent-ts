@@ -1,9 +1,11 @@
 import type { ToolFn } from '../types'
 import { z } from 'zod4'
 import type { Alojamiento } from '../../db/types';
-import { queryDisponibilidad } from '../../db/search'
+import { getDb } from '../../db/connection'
 import { formatearResultadoParaLLM, validarConsulta, filtrarAlojamientosDisponibles, convertirParametrosAConsulta } from '../../utils/filter'
 import { parseDateToISO } from '../../utils/dateFormatter';
+import { config } from '../../config/config'
+
 /*
 export const disponibilidadToolDefinition = {
 	name: 'disponibilidadSearch',
@@ -63,7 +65,7 @@ NO usar para preguntas generales o conversación casual.
 */
 
 export const disponibilidadToolDefinition = {
-	name: 'busquedaDeDisponibilidad',
+	name: 'busqueda_de_disponibilidad',
 	parameters: z.object({
 		fechaInicio: z
 			.string()
@@ -162,3 +164,13 @@ export const busquedaDeDisponibilidad: ToolFn<Args, string> = async ({ toolArgs 
 	}
 
 }
+
+const queryDisponibilidad = async (fechaInicio: string, fechaFin: string): Promise<Alojamiento[]> => {
+	const sql = `SELECT fecha, cabE, cabO, hab1, hab2, hab3, hab4 FROM ${config.database.tableName} WHERE fecha BETWEEN ? AND ?`;
+	const db = getDb();
+	const rows = await db.all(sql, [fechaInicio, fechaFin]);
+	await db.close();
+	return rows || [];
+
+}
+

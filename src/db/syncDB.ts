@@ -116,7 +116,7 @@ export class SyncApplication {
 		return JSON.stringify(resultadoFormateado);
 	}
 
-	
+
 	private generarMensajeResumen(result: SyncResult): string {
 		if (result.errors.length > 0) {
 			return `Sincronización completada con ${result.errors.length} errores. Se procesaron ${result.totalProcessed} registros: ${result.inserted} insertados y ${result.skipped} saltados.`;
@@ -188,6 +188,7 @@ export class SyncApplication {
 	}
 }
 
+/*
 async function testSync() {
 	const app = new SyncApplication();
 
@@ -212,5 +213,4 @@ async function testSync() {
 		await app.cleanup();
 	}
 }
-
-testSync();
+*/

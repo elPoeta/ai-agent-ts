@@ -15,7 +15,6 @@ export interface SqliteDbInstance {
 export type SqliteDatabase = () => SqliteDbInstance;
 
 export const getDb: SqliteDatabase = () => {
-	console.log(getPath("database", "alojamiento.db"))
 	const db = new sqlite3.Database(getPath("database", "alojamiento.db"));
 
 	return {

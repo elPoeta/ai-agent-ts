@@ -1,4 +1,4 @@
 import { disponibilidadToolDefinition } from './busquedaDeDisponibilidad'
-import {sincronizarGoogleSheetsConDatabaseToolDefinition} from './sincronizarDatabase'
+import { sincronizarGoogleSheetsConDatabaseToolDefinition } from './sincronizarDatabase'
 
-export const tools = [disponibilidadToolDefinition,sincronizarGoogleSheetsConDatabaseToolDefinition]
+export const tools = [disponibilidadToolDefinition, sincronizarGoogleSheetsConDatabaseToolDefinition]

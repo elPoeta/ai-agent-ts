@@ -1,3 +1,4 @@
+/*
 import { db } from './connection';
 
 export const queryDisponibilidad = async (fechaInicio: string, fechaFin: string) => {
@@ -14,3 +15,4 @@ export const queryDisponibilidad = async (fechaInicio: string, fechaFin: string)
 		});
 	});
 }
+*/

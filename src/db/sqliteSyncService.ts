@@ -171,7 +171,7 @@ class SQLiteSyncService {
 					const exists = await this.dateExists(parsedRow.fecha);
 
 					if (exists) {
-						console.log(`Fecha ${parsedRow.fecha} ya existe, saltando...`);
+						//console.log(`Fecha ${parsedRow.fecha} ya existe, saltando...`);
 						result.skipped++;
 					} else {
 						// Insertar nueva fila

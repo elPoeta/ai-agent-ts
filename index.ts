@@ -5,7 +5,6 @@ import figlet from 'figlet';
 import { input } from '@inquirer/prompts'
 import chalk from 'chalk'
 
-
 await clearMessages();
 
 console.log(chalk.bold.green(figlet.textSync('HOSTER-IA')));
@@ -26,6 +25,7 @@ const prompt = async () => {
 }
 
 prompt();
+
 
 process.on('unhandledRejection', (reason, promise) => {
 	console.error('Unhandled Rejection at:', promise, 'reason:', reason);

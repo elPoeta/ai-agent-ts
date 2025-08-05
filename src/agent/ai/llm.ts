@@ -17,18 +17,69 @@ export const runLLM = async ({
 	temperature?: number
 	systemPrompt?: string
 }) => {
+	/*
+		const formattedTools: ChatCompletionTool[] = tools.map(tool => ({
+			type: 'function',
+			function: {
+				name: tool.name,
+				description: tool.description,
+				parameters: tool.parameters instanceof z.ZodType
+					? z.toJSONSchema(tool.parameters)
+					: tool.parameters,
+			},
+		}));
+		*/
+	const formattedTools = tools.map(tool => {
+		const params = tool.parameters instanceof z.ZodType
+			? z.toJSONSchema(tool.parameters)
+			: tool.parameters
+
+		// Si no tiene properties, le agregamos un confirm opcional
+		if (params?.type === 'object' && Object.keys(params.properties || {}).length === 0) {
+			params.properties = { confirm: { type: 'boolean', description: 'Confirmar ejecución' } }
+			params.required = []
+		}
+
+		return {
+			type: 'function',
+			function: {
+				name: tool.name,
+				description: tool.description,
+				parameters: params,
+			}
+		}
+	})
+	/*
+	const ensureAtLeastOneParam = (tool: any) => {
+		if (tool.parameters instanceof z.ZodType) {
+			const shape = (tool.parameters as z.ZodObject<any>).shape
+			console.log("sahpe", shape)
+			if (Object.keys(shape).length === 0) {
+				// Add confirm: boolean
+				return tool.parameters.extend({
+					confirm: z.boolean().optional().describe('Confirma la ejecución'),
+				});
+			}
+		}
+		return tool.parameters;
+	};
+
+
 	const formattedTools: ChatCompletionTool[] = tools.map(tool => ({
 		type: 'function',
 		function: {
 			name: tool.name,
 			description: tool.description,
-			parameters: z.toJSONSchema(tool.parameters),
+			parameters: z.toJSONSchema(ensureAtLeastOneParam(tool)),
 		},
 	}));
+*/
+	//console.log('🔍 Tools disponibles:', tools.map(t => t.name));
+	//console.log('🔍 Formatted tools:', JSON.stringify(formattedTools, null, 2));
 
 	const model = config.ai.model;
 
-	// Configuración condicional de tool_choice
+
 	const chatConfig: any = {
 		model,
 		temperature,
@@ -126,4 +177,8 @@ export const runLLM = async ({
 
 	return response.choices[0].message
 }
+
+
+
+
 */
