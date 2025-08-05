@@ -66,7 +66,7 @@ export class SyncApplication {
 			const result = await this.syncService.syncFromSheets(sheetRange);
 
 			// Mostrar resultados
-			this.displaySyncResults(result);
+			//this.displaySyncResults(result);
 
 			return result;
 
@@ -89,6 +89,44 @@ export class SyncApplication {
 				console.log(`   ${index + 1}. ${error}`);
 			});
 		}
+	}
+
+
+
+	public formatearResultadoSincronizacionParaLLM(result: SyncResult): string {
+		const tieneErrores = result.errors.length > 0;
+
+		const resultadoFormateado = {
+			exito: !tieneErrores,
+			resumen: {
+				totalProcesadas: result.totalProcessed,
+				insertadas: result.inserted,
+				saltadas: result.skipped,
+				errores: result.errors.length
+			},
+			mensaje: this.generarMensajeResumen(result),
+			...(tieneErrores && {
+				detallesErrores: result.errors.map((error, index) => ({
+					numero: index + 1,
+					descripcion: error
+				}))
+			})
+		};
+
+		return JSON.stringify(resultadoFormateado);
+	}
+
+	
+	private generarMensajeResumen(result: SyncResult): string {
+		if (result.errors.length > 0) {
+			return `Sincronización completada con ${result.errors.length} errores. Se procesaron ${result.totalProcessed} registros: ${result.inserted} insertados y ${result.skipped} saltados.`;
+		}
+
+		if (result.inserted === 0 && result.skipped > 0) {
+			return `Sincronización completada exitosamente. No se requirieron cambios - ${result.skipped} registros ya estaban actualizados.`;
+		}
+
+		return `Sincronización completada exitosamente. Se procesaron ${result.totalProcessed} registros: ${result.inserted} nuevos insertados y ${result.skipped} saltados.`;
 	}
 
 	async showDatabaseStats(): Promise<void> {
