@@ -15,6 +15,7 @@
 		"run:file": "dotenvx run -f .env.local -- pnpm dlx tsx $1"
 	},
 	"devDependencies": {
+		"@types/express": "^5.0.3",
 		"@types/figlet": "^1.7.0",
 		"@types/node": "latest"
 	},
@@ -26,6 +27,7 @@
 		"@inquirer/prompts": "^7.5.3",
 		"chalk": "^5.3.0",
 		"csv-parse": "^5.5.6",
+		"express": "^5.1.0",
 		"figlet": "^1.8.2",
 		"googleapis": "^154.1.0",
 		"got": "^14.4.4",

@@ -2,39 +2,49 @@
   "messages": [
     {
       "role": "user",
-      "content": "sincronizar la bd",
-      "id": "dc45f9d5-4707-46eb-bb5e-e4dbf3815f46",
-      "createdAt": "2025-08-05T16:17:42.759Z"
+      "content": "quiero saber la disponibilidad entre el 2025-10-05 y el 2025-10-15",
+      "id": "4de56ddd-2278-4277-9429-9283f87d5ee2",
+      "createdAt": "2025-08-07T12:17:54.172Z"
     },
     {
       "role": "assistant",
-      "content": "",
       "tool_calls": [
         {
-          "id": "call_4p423hqx",
-          "index": 0,
-          "type": "function",
           "function": {
-            "name": "sincronizar_google_sheets_con_database",
-            "arguments": "{\"confirm\":true}"
-          }
+            "arguments": "{\"fechaFin\":\"2025-10-15\",\"fechaInicio\":\"2025-10-05\"}",
+            "name": "busqueda_de_disponibilidad"
+          },
+          "id": "",
+          "type": "function"
         }
       ],
-      "id": "c69ba57c-4c6a-4618-87a1-9c86a18b8049",
-      "createdAt": "2025-08-05T16:17:43.608Z"
+      "id": "6a6f0a17-36ab-49ee-b977-83b6005e1ea7",
+      "createdAt": "2025-08-07T12:17:56.047Z"
     },
     {
       "role": "tool",
-      "content": "{\"exito\":true,\"resumen\":{\"totalProcesadas\":567,\"insertadas\":0,\"saltadas\":567,\"errores\":0},\"mensaje\":\"Sincronización completada exitosamente. No se requirieron cambios - 567 registros ya estaban actualizados.\"}",
-      "tool_call_id": "call_4p423hqx",
-      "id": "43d5c48a-970f-4ead-9c74-51f9664ca3f1",
-      "createdAt": "2025-08-05T16:17:44.301Z"
+      "content": "{\"error\":false,\"consulta\":{\"fechaInicio\":\"2025-10-05\",\"fechaFin\":\"2025-10-15\",\"diasSolicitados\":11},\"disponibles\":[{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Este\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"cabaña\",\"codigo\":\"Cabaña Oeste\",\"capacidadMaxima\":2,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 1\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 3\",\"capacidadMaxima\":6,\"cantidadDias\":11},{\"tipo\":\"habitacion\",\"codigo\":\"Habitación 4\",\"capacidadMaxima\":6,\"cantidadDias\":11}]}",
+      "tool_call_id": "",
+      "id": "053ed75c-76d9-4215-83b8-886629f7de4a",
+      "createdAt": "2025-08-07T12:17:56.052Z"
     },
     {
+      "content": "¡Claro! Entre el 2025-10-05 y el 2025-10-15, tenemos las siguientes opciones disponibles:\n\n*   **Cabaña Este:** Capacidad máxima 2 personas, disponible por 11 días.\n*   **Cabaña Oeste:** Capacidad máxima 2 personas, disponible por 11 días.\n*   **Habitación 1:** Capacidad máxima 6 personas, disponible por 11 días.\n*   **Habitación 3:** Capacidad máxima 6 personas, disponible por 11 días.\n*   **Habitación 4:** Capacidad máxima 6 personas, disponible por 11 días.\n\n¿Te gustaría reservar alguna de estas opciones?",
       "role": "assistant",
-      "content": "Lo siento, pero no puedo proporcionar respuestas en formato de mensaje de sistema. ¿Hay algo más en lo que pueda ayudarte?",
-      "id": "a1115152-5774-45bc-8e97-639dbd8449c8",
-      "createdAt": "2025-08-05T16:17:44.951Z"
+      "id": "e4378d50-e620-4b54-b4a5-a1770e622793",
+      "createdAt": "2025-08-07T12:17:58.364Z"
+    },
+    {
+      "role": "user",
+      "content": "puedes responderme en formato de tabla",
+      "id": "bb5c28e9-b8c6-4cda-afad-f98a9c3f18a4",
+      "createdAt": "2025-08-07T12:18:33.880Z"
+    },
+    {
+      "content": "¡Por supuesto! Aquí tienes la información de disponibilidad en formato de tabla:\n\n| Tipo de Alojamiento | Código        | Capacidad Máxima | Días Disponibles |\n| :------------------- | :------------ | :--------------- | :--------------- |\n| Cabaña             | Cabaña Este   | 2                | 11               |\n| Cabaña             | Cabaña Oeste  | 2                | 11               |\n| Habitación           | Habitación 1  | 6                | 11               |\n| Habitación           | Habitación 3  | 6                | 11               |\n| Habitación           | Habitación 4  | 6                | 11               |\n\nEspero que esta presentación te sea más útil. ¿Hay algo más en lo que te pueda ayudar?\n",
+      "role": "assistant",
+      "id": "524c4a31-a75c-44b5-9f9f-886d178f67e9",
+      "createdAt": "2025-08-07T12:18:36.544Z"
     }
   ]
 }

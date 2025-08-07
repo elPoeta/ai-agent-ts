@@ -1,4 +1,5 @@
 import { JSONFilePreset } from 'lowdb/node'
+import { Low } from 'lowdb'
 import type { AIMessage } from '../types'
 import { v4 as uuidv4 } from 'uuid'
 import { getPath } from "../../config/pathResolver"
@@ -29,20 +30,20 @@ const defaultData: Data = {
 	messages: [],
 }
 
-export const getDb = async () => {
+export const getMemDb = async (): Promise<Low<Data>> => {
 	const db = await JSONFilePreset<Data>(getPath('database', 'memory.json'), defaultData)
 	return db
 }
 
 export const addMessages = async (messages: AIMessage[]) => {
-	const db = await getDb()
+	const db = await getMemDb()
 	db.data.messages.push(...messages.map(addMetadata))
 
 	await db.write()
 }
 
 export const getMessages = async () => {
-	const db = await getDb()
+	const db = await getMemDb()
 	const messages = db.data.messages.map(removeMetadata)
 	const lastFive = messages.slice(-5)
 
@@ -72,7 +73,7 @@ export const saveToolResponse = async (
 }
 
 export const clearMessages = async () => {
-	const db = await getDb();
+	const db = await getMemDb();
 	db.data.messages = [];
 	await db.write();
 }

@@ -6,4 +6,3 @@ export const openai = new OpenAI({
 	baseURL: config.ai.url
 });
 
-

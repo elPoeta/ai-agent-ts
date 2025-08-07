@@ -5,7 +5,7 @@ export const config = {
 		model: process.env.MODEL || "llama3.2",
 		smart: process.env.SMART === "true",
 		url: process.env.URL,
-		apiKey: process.env.API_KEY || ""
+		apiKey: process.env.API_KEY || "",
 	},
 	google: {
 		spreadsheetId: process.env.GOOGLE_SHEET_ID!,

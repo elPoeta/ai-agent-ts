@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AI Chat Interface</title>
+	<!-- Marked.js para renderizar Markdown -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+	<!-- Highlight.js para syntax highlighting de código -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 800px;
+			height: 90vh;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(20px);
+			border-radius: 20px;
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+
+		.header {
+			background: linear-gradient(135deg, #4f46e5, #7c3aed);
+			color: white;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.header h1 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.ai-icon {
+			width: 30px;
+			height: 30px;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 1.2rem;
+		}
+
+		.model-selector {
+			background: rgba(255, 255, 255, 0.1);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 8px;
+			color: white;
+			padding: 8px 12px;
+			font-size: 0.9rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.model-selector:hover {
+			background: rgba(255, 255, 255, 0.2);
+			transform: translateY(-1px);
+		}
+
+		.model-selector option {
+			background: #4f46e5;
+			color: white;
+		}
+
+		.chat-container {
+			flex: 1;
+			padding: 20px;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			scroll-behavior: smooth;
+		}
+
+		.message {
+			max-width: 70%;
+			padding: 16px 20px;
+			border-radius: 18px;
+			font-size: 0.95rem;
+			line-height: 1.5;
+			animation: slideIn 0.3s ease;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		}
+
+		@keyframes slideIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.message.user {
+			align-self: flex-end;
+			background: linear-gradient(135deg, #4f46e5, #7c3aed);
+			color: white;
+			border-bottom-right-radius: 6px;
+		}
+
+		.message.ai {
+			align-self: flex-start;
+			background: white;
+			color: #374151;
+			border: 1px solid #e5e7eb;
+			border-bottom-left-radius: 6px;
+			position: relative;
+		}
+
+		.message.ai::before {
+			content: '🤖';
+			position: absolute;
+			top: -8px;
+			left: 16px;
+			background: white;
+			padding: 4px 8px;
+			border-radius: 50%;
+			font-size: 0.8rem;
+			border: 1px solid #e5e7eb;
+		}
+
+		/* Estilos para contenido Markdown */
+		.message-content {
+			word-wrap: break-word;
+		}
+
+		.message-content h1,
+		.message-content h2,
+		.message-content h3,
+		.message-content h4,
+		.message-content h5,
+		.message-content h6 {
+			margin: 16px 0 8px 0;
+			font-weight: 600;
+			line-height: 1.25;
+		}
+
+		.message-content h1 {
+			font-size: 1.5em;
+			border-bottom: 1px solid #e5e7eb;
+			padding-bottom: 8px;
+		}
+
+		.message-content h2 {
+			font-size: 1.3em;
+		}
+
+		.message-content h3 {
+			font-size: 1.1em;
+		}
+
+		.message-content p {
+			margin: 8px 0;
+			line-height: 1.6;
+		}
+
+		.message-content ul,
+		.message-content ol {
+			margin: 8px 0;
+			padding-left: 24px;
+		}
+
+		.message-content li {
+			margin: 4px 0;
+		}
+
+		.message-content blockquote {
+			margin: 12px 0;
+			padding: 8px 16px;
+			border-left: 4px solid #4f46e5;
+			background: rgba(79, 70, 229, 0.1);
+			font-style: italic;
+			border-radius: 0 8px 8px 0;
+		}
+
+		.message-content code {
+			background: rgba(0, 0, 0, 0.1);
+			padding: 2px 6px;
+			border-radius: 4px;
+			font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+			font-size: 0.85em;
+		}
+
+		.message-content pre {
+			background: #1f2937;
+			color: #f9fafb;
+			padding: 16px;
+			border-radius: 8px;
+			overflow-x: auto;
+			margin: 12px 0;
+			position: relative;
+		}
+
+		.message-content pre code {
+			background: transparent;
+			padding: 0;
+			color: inherit;
+			font-size: 0.9em;
+		}
+
+		.message-content table {
+			border-collapse: collapse;
+			width: 100%;
+			margin: 12px 0;
+			font-size: 0.9em;
+		}
+
+		.message-content th,
+		.message-content td {
+			border: 1px solid #e5e7eb;
+			padding: 8px 12px;
+			text-align: left;
+		}
+
+		.message-content th {
+			background: #f9fafb;
+			font-weight: 600;
+		}
+
+		.message-content a {
+			color: #4f46e5;
+			text-decoration: underline;
+			transition: color 0.2s ease;
+		}
+
+		.message-content a:hover {
+			color: #7c3aed;
+		}
+
+		.message-content img {
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+			margin: 8px 0;
+		}
+
+		.message-content hr {
+			border: none;
+			border-top: 2px solid #e5e7eb;
+			margin: 20px 0;
+		}
+
+		/* Ajustes para mensajes de usuario (sin Markdown) */
+		.message.user .message-content {
+			color: white;
+		}
+
+		/* Copy button para bloques de código */
+		.code-block-container {
+			position: relative;
+		}
+
+		.copy-button {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			background: rgba(255, 255, 255, 0.1);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			color: white;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 0.8em;
+			cursor: pointer;
+			opacity: 0.7;
+			transition: opacity 0.2s ease;
+		}
+
+		.copy-button:hover {
+			opacity: 1;
+			background: rgba(255, 255, 255, 0.2);
+		}
+
+		.input-container {
+			padding: 20px;
+			background: white;
+			border-top: 1px solid #e5e7eb;
+			display: flex;
+			gap: 12px;
+			align-items: flex-end;
+		}
+
+		.input-group {
+			flex: 1;
+			position: relative;
+		}
+
+		.chat-input {
+			width: 100%;
+			min-height: 50px;
+			max-height: 120px;
+			padding: 15px 20px;
+			border: 2px solid #e5e7eb;
+			border-radius: 25px;
+			font-size: 1rem;
+			font-family: inherit;
+			resize: none;
+			transition: all 0.3s ease;
+			background: #f9fafb;
+		}
+
+		.chat-input:focus {
+			outline: none;
+			border-color: #4f46e5;
+			background: white;
+			box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+		}
+
+		.send-button {
+			width: 50px;
+			height: 50px;
+			background: linear-gradient(135deg, #4f46e5, #7c3aed);
+			border: none;
+			border-radius: 50%;
+			color: white;
+			font-size: 1.2rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+		}
+
+		.send-button:hover:not(:disabled) {
+			transform: translateY(-2px);
+			box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+		}
+
+		.send-button:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+			transform: none;
+		}
+
+		.loading {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			color: #6b7280;
+			font-style: italic;
+		}
+
+		.loading-dots {
+			display: flex;
+			gap: 4px;
+		}
+
+		.loading-dot {
+			width: 6px;
+			height: 6px;
+			background: #6b7280;
+			border-radius: 50%;
+			animation: loadingPulse 1.4s infinite;
+		}
+
+		.loading-dot:nth-child(2) {
+			animation-delay: 0.2s;
+		}
+
+		.loading-dot:nth-child(3) {
+			animation-delay: 0.4s;
+		}
+
+		@keyframes loadingPulse {
+
+			0%,
+			80%,
+			100% {
+				transform: scale(0.8);
+				opacity: 0.5;
+			}
+
+			40% {
+				transform: scale(1);
+				opacity: 1;
+			}
+		}
+
+		.welcome-message {
+			text-align: center;
+			color: #6b7280;
+			font-style: italic;
+			margin: 40px 0;
+		}
+
+		.welcome-message h2 {
+			color: #374151;
+			margin-bottom: 8px;
+			font-size: 1.3rem;
+		}
+
+		.error-message {
+			background: #fef2f2;
+			border: 1px solid #fecaca;
+			color: #dc2626;
+			padding: 16px;
+			border-radius: 12px;
+			margin: 10px 0;
+		}
+
+		@media (max-width: 768px) {
+			.container {
+				height: 100vh;
+				border-radius: 0;
+				margin: 0;
+			}
+
+			.message {
+				max-width: 85%;
+			}
+
+			.header {
+				flex-direction: column;
+				gap: 12px;
+				text-align: center;
+			}
+
+			.input-container {
+				padding: 15px;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>
+				<div class="ai-icon">🤖</div>
+				HosterIA Chat Assistant
+			</h1>
+			<select class="model-selector" id="modelSelector">
+				<option selected value="llama3.2">llama3.2</option>
+			</select>
+		</div>
+
+		<div class="chat-container" id="chatContainer">
+			<div class="welcome-message">
+				<h2>¡Hola! 👋</h2>
+				<p>Soy HosterIA tu asistente de IA. ¿En qué puedo ayudarte hoy?</p>
+			</div>
+		</div>
+
+		<div class="input-container">
+			<div class="input-group">
+				<textarea class="chat-input" id="messageInput" placeholder="Escribe tu mensaje aquí..."
+					rows="4"></textarea>
+			</div>
+			<button class="send-button" id="sendButton">
+				➤
+			</button>
+		</div>
+	</div>
+
+	<script>
+		class ChatInterface {
+			constructor() {
+				this.chatContainer = document.getElementById('chatContainer');
+				this.messageInput = document.getElementById('messageInput');
+				this.sendButton = document.getElementById('sendButton');
+				this.modelSelector = document.getElementById('modelSelector');
+				this.isLoading = false;
+
+				this.initializeEventListeners();
+				this.loadModels();
+				this.autoResizeTextarea();
+				this.configureMarked();
+			}
+
+			configureMarked() {
+				// Configurar marked para mejor renderizado
+				marked.setOptions({
+					highlight: function (code, lang) {
+						if (lang && hljs.getLanguage(lang)) {
+							try {
+								return hljs.highlight(code, {language: lang}).value;
+							} catch (err) {
+								console.warn('Highlight.js error:', err);
+							}
+						}
+						return hljs.highlightAuto(code).value;
+					},
+					breaks: true,
+					gfm: true
+				});
+			}
+
+			initializeEventListeners() {
+				this.sendButton.addEventListener('click', () => this.sendMessage());
+				this.messageInput.addEventListener('keydown', (e) => {
+					if (e.key === 'Enter' && !e.shiftKey) {
+						e.preventDefault();
+						this.sendMessage();
+					}
+				});
+			}
+
+			autoResizeTextarea() {
+				this.messageInput.addEventListener('input', () => {
+					this.messageInput.style.height = 'auto';
+					this.messageInput.style.height = Math.min(this.messageInput.scrollHeight, 120) + 'px';
+				});
+			}
+
+			async loadModels() {
+				try {
+					const response = await fetch('/api/models');
+					const models = await response.json();
+					this.modelSelector.innerHTML = '';
+					models.forEach(model => {
+						const option = document.createElement('option');
+						option.value = model.id;
+						option.textContent = model.name;
+						this.modelSelector.appendChild(option);
+					});
+				} catch (error) {
+					console.warn('Could not load models:', error);
+				}
+			}
+
+			async sendMessage() {
+				const message = this.messageInput.value.trim();
+				if (!message || this.isLoading) return;
+
+				this.addMessage(message, 'user');
+				this.messageInput.value = '';
+				this.messageInput.style.height = 'auto';
+				this.setLoading(true);
+
+				try {
+					const response = await fetch('/api/chat', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							message: message,
+							model: this.modelSelector.value
+						})
+					});
+
+					const data = await response.json();
+					if (!response.ok) {
+						throw new Error(data.error || 'Error en la respuesta del servidor');
+					}
+
+					this.addMessage(data.response, 'ai');
+				} catch (error) {
+					console.error('Error:', error);
+					this.addErrorMessage(`Error: ${error.message}`);
+				} finally {
+					this.setLoading(false);
+				}
+			}
+
+			addMessage(content, sender) {
+				// Remover mensaje de bienvenida si existe
+				const welcomeMessage = this.chatContainer.querySelector('.welcome-message');
+				if (welcomeMessage) {
+					welcomeMessage.remove();
+				}
+
+				const messageDiv = document.createElement('div');
+				messageDiv.className = `message ${sender}`;
+
+				const contentDiv = document.createElement('div');
+				contentDiv.className = 'message-content';
+
+				if (sender === 'ai') {
+					// Renderizar Markdown para mensajes del AI
+					const htmlContent = marked.parse(content);
+					contentDiv.innerHTML = htmlContent;
+
+					// Añadir botones de copia a los bloques de código
+					this.addCopyButtons(contentDiv);
+				} else {
+					// Para mensajes del usuario, mostrar texto plano
+					contentDiv.textContent = content;
+				}
+
+				messageDiv.appendChild(contentDiv);
+				this.chatContainer.appendChild(messageDiv);
+				this.scrollToBottom();
+
+				// Highlight código después de añadir al DOM
+				if (sender === 'ai') {
+					contentDiv.querySelectorAll('pre code').forEach((block) => {
+						hljs.highlightElement(block);
+					});
+				}
+			}
+
+			addCopyButtons(container) {
+				const codeBlocks = container.querySelectorAll('pre');
+				codeBlocks.forEach((pre) => {
+					const wrapper = document.createElement('div');
+					wrapper.className = 'code-block-container';
+
+					const copyButton = document.createElement('button');
+					copyButton.className = 'copy-button';
+					copyButton.textContent = 'Copiar';
+					copyButton.onclick = () => this.copyToClipboard(pre.textContent, copyButton);
+
+					pre.parentNode.insertBefore(wrapper, pre);
+					wrapper.appendChild(pre);
+					wrapper.appendChild(copyButton);
+				});
+			}
+
+			async copyToClipboard(text, button) {
+				try {
+					await navigator.clipboard.writeText(text);
+					const originalText = button.textContent;
+					button.textContent = '¡Copiado!';
+					button.style.background = 'rgba(34, 197, 94, 0.2)';
+
+					setTimeout(() => {
+						button.textContent = originalText;
+						button.style.background = 'rgba(255, 255, 255, 0.1)';
+					}, 2000);
+				} catch (err) {
+					console.error('Error al copiar:', err);
+					button.textContent = 'Error';
+					setTimeout(() => {
+						button.textContent = 'Copiar';
+					}, 2000);
+				}
+			}
+
+			addErrorMessage(content) {
+				const errorDiv = document.createElement('div');
+				errorDiv.className = 'error-message';
+				errorDiv.textContent = content;
+				this.chatContainer.appendChild(errorDiv);
+				this.scrollToBottom();
+			}
+
+			setLoading(loading) {
+				this.isLoading = loading;
+				this.sendButton.disabled = loading;
+
+				if (loading) {
+					const loadingDiv = document.createElement('div');
+					loadingDiv.className = 'message ai loading';
+					loadingDiv.innerHTML = `
+                        <span>Pensando</span>
+                        <div class="loading-dots">
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                        </div>
+                    `;
+					this.chatContainer.appendChild(loadingDiv);
+					this.scrollToBottom();
+				} else {
+					const loadingMessage = this.chatContainer.querySelector('.loading');
+					if (loadingMessage) {
+						loadingMessage.remove();
+					}
+				}
+			}
+
+			scrollToBottom() {
+				this.chatContainer.scrollTop = this.chatContainer.scrollHeight;
+			}
+		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			new ChatInterface();
+		});
+	</script>
+</body>
+
+</html>
