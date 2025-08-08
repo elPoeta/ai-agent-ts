@@ -6,6 +6,7 @@
 		"start": "dotenvx run -f .env -- pnpm dlx tsx index.ts",
 		"start:gemini": "dotenvx run -f .env.gemini -- pnpm dlx tsx index.ts",
 		"start:local": "dotenvx run -f .env.local -- pnpm dlx tsx index.ts",
+		"start:dmr": "dotenvx run -f .env.dmr -- pnpm dlx tsx index.ts",
 		"start:qwen3": "dotenvx run -f .env.qwen -- pnpm dlx tsx index.ts",
 		"start:llama": "dotenvx run -f .env.llama -- pnpm dlx tsx index.ts",
 		"start:mistral": "dotenvx run -f .env.mistral -- pnpm dlx tsx index.ts",
